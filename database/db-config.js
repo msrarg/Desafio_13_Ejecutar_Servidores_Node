@@ -5,8 +5,8 @@ const dbConnectionMongoAtlas = async () => {
         await mongoose.connect( process.env.MONGO_CNN, {
             useNewUrlParser:    true, // <-- no longer necessary.
             useUnifiedTopology: true, // <-- no longer necessary.
-            // useCreateIndex:     true,
-            // useFindAndModify:   false
+            // useCreateIndex:     true, // <-- no longer necessary.
+            // useFindAndModify:   false // <-- no longer necessary.
         });
         console.log('MongoDB Atlas connection established.');
     } catch (error) {

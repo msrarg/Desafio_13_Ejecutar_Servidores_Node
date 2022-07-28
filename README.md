@@ -1,8 +1,29 @@
 ### Desafío 13: 
-### Primera parte: Ejecutar Servidores Node
 
 Formato: link a un repositorio en Github con el proyecto cargado. 
 Sugerencia: no incluir los node_modules
+
+### Primera parte: Ejecutar Servidores Node
+### ----------------------------------------------------------------------------------------------------------------------
+
+1) Instalar las dependecias con "npm install".
+
+2) Definir las variables de entorno en el .env de acuerdo al .env.example
+
+3) Ejecutar "node app" arrancar el server.
+
+4) El parámetro "modo" define el modo de ejecución del server, el valor por defecto de la opción es fork:
+
+node app.js --port NUMERO_PUERTO --modo fork
+node app.js --port NUMERO_PUERTO --modo cluster
+
+pm2 start app.js --watch -- -- NUMERO_PUERTO
+
+Reemplazando el 0 por otro numero se generan n cluster, mientras que con 0 genera la cantidad máxima.
+
+pm2 start app.js --watch -i 0 -- -- NUMERO_PUERTO
+
+### ----------------------------------------------------------------------------------------------------------------------
 
 >> Consigna: 
 
@@ -44,7 +65,17 @@ Ejemplo:
 pm2 start ./miservidor.js -- --port=8080 --modo=fork
 pm2 start ./miservidor.js -- --port=8081 --modo=cluster
 pm2 start ./miservidor.js -- --port=8082 --modo=fork
-...
+### Ejemplo de como ejecutar servidores con PM2:
 
+Para resolver el desafío se deben ejecutar en modo cluster los siguientes comandos:
 
+pm2  start app.js --name="8082" --watch -i 3  -- -- 8082
+pm2  start app.js --name="8083" --watch -i 3  -- -- 8083
+pm2  start app.js --name="8084" --watch -i 3  -- -- 8084
+pm2  start app.js --name="8085" --watch -i 3  -- -- 8085
 
+Para monitorear el rendimiento se puede ver con:
+
+pm2 monit
+
+El archivo de configuracion del Nginx se encuentra en la carpeta Archivo_nginx.conf

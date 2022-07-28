@@ -5,6 +5,12 @@ const argv = require('yargs')
             demandOption: true,
             describe: 'Puerto a utilizar',
             type: 'number'
+        },
+        'm':{
+            alias: 'modo',
+            demandOption: true,
+            describe: "Modo CLUSTER or FORK",
+            type: 'string'
         }
     })
     .check((argv, options) => {

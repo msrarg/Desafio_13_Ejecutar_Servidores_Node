@@ -1,3 +1,6 @@
+const cluster = require('cluster');
+const core = require('os');
+
 const argv   = require('./config/config.yargs');
 const Server = require('./models/server');
 
