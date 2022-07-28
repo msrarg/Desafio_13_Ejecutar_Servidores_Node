@@ -82,32 +82,13 @@ class Server {
         this.app.use( this.randomPath,   require('../routes/randoms.routes'));
     }
 
-    listen() {
-        this.port = argv.p || 8080;
+    listen(port) {
+        this.port = port;
         this.app.listen( this.port, () => {
-            console.log('Servidor corriendo en puerto', this.port );
+            console.log(`Server up on port: ${this.port} in process ID:(${process.pid})`); 
         });
 
-        const puerto = argv.port ? argv.port : argv._.length > 0 ? argv._[0] : 8080
-        const modo = argv.modo || 'fork';
-
-        if (modo !== 'fork'){
-            if (cluster.isPrimary) {
-                console.log(`Proceso principal ID:(${process.pid})`)
-                for(let i = 0; i <  core.cpus().length; i++) {
-                    cluster.fork();
-                }
-            
-                cluster.on('exit', (worker) => {
-                    cluster.fork();
-                });
-            
-            } else {
-                startServer();
-            }
-        } else {
-            startServer();
-        }
+        this.app.on('error', (err) => console.log(err));
     }
 }
 
